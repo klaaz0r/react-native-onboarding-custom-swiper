@@ -19,9 +19,9 @@ import Onboarding from 'react-native-onboarding-swiper';
 ```js
 <Onboarding
   pages={[
-    <Categories />,
-    <Notifications />,
-    <EmailPrefferences />,
+    Categories,
+    Notifications,
+    EmailPrefferences,
     ...
   ]}
 />

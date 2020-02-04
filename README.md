@@ -1,20 +1,13 @@
-# `<Onboarding />` [![npm](https://img.shields.io/npm/v/react-native-onboarding-swiper.svg)](https://www.npmjs.com/package/react-native-onboarding-swiper) [![npm](https://img.shields.io/npm/dm/react-native-onboarding-swiper.svg)](https://www.npmjs.com/package/react-native-onboarding-swiper)
+# React native onboarding swiper with custom components
+This is a fork from `react-native-onboarding-swiper`, it lets you use custom components instead of just images and text.
 
-| ![](demo/simple1.png) | ![](demo/simple2.png) | ![](demo/demo.gif) |
-| --------------------- | --------------------- | ------------------ |
-
-
-There are many ways to onboard people to your mobile app. But for React-Native, there is solely _one_ component that is a) **easy to setup** and b) **highly customizable**:
-`react-native-onboarding-swiper`.
-
-Your new users shouldn't jump in at the deep end. First give them a pleasurable, delightful introduction and only then let them explore your awesome app.
-
-Getting everything running merely takes a minute. Don't believe me? Try it out!
+## Motivation
+I needed an onboarding flow that let's users set email settings, push settings and select default categories
 
 ## Install
 
 ```bash
-npm i react-native-onboarding-swiper
+yarn add react-native-onboarding-custom-swiper
 ```
 
 ```js
@@ -26,30 +19,17 @@ import Onboarding from 'react-native-onboarding-swiper';
 ```js
 <Onboarding
   pages={[
-    {
-      backgroundColor: '#fff',
-      image: <Image source={require('./images/circle.png')} />,
-      title: 'Onboarding',
-      subtitle: 'Done with React Native Onboarding Swiper',
-    },
+    <Categories />,
+    <Notifications />,
+    <EmailPrefferences />,
     ...
   ]}
 />
 ```
 
-## Examples
-
-Try out the example [running in your browser](https://snack.expo.io/rk80s-CDz).
-
-Also check out the three examples files: the [simple example](examples/Simple.js), the [example with a Call-to-Action button](examples/WithCTA.js) or the [example with custom button components](examples/CustomButtons.js).
-
 ## Required Properties
 
-* `pages` (required): an array of pages in the following shape:
-  * `backgroundColor` (required): a background color. The color of the font and dots adapts to the background color.
-  * `image` (required): a component (e.g. `<Image />`) to display at the top of the page.
-  * `title` (required): a string **OR** a React-Native component.
-  * `subtitle` (required): a string **OR** a React-Native component.
+* `pages` (required): an array of React elements
 
 ## Optional Properties
 
@@ -109,10 +89,11 @@ If you have a **question**, found a **bug** or want to propose a new **feature**
 
 ## Related
 
-* https://github.com/jacse/react-native-app-intro-slider
+* https://github.com/jfilter/react-native-onboarding-swiper
 
 ## Acknowledgements
 
+Built upon the work by [jfilter](https://github.com/jfilter/react-native-onboarding-swiper) 
 Built upon the work by [Gosha Arinich](https://github.com/goshakkk/react-native-simple-onboarding) which was originally inspired by [AndroidOnboarder](https://github.com/chyrta/AndroidOnboarder).
 
 ## License

@@ -12,7 +12,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import tinycolor from 'tinycolor2';
 
-import Page from './Page';
 import Pagination from './Pagination';
 import Dot from './Dot';
 import SkipButton from './buttons/SkipButton';
@@ -22,7 +21,7 @@ import DoneButton from './buttons/DoneButton';
 // hotfix: https://github.com/facebook/react-native/issues/16710
 const itemVisibleHotfix = { itemVisiblePercentThreshold: 100 };
 
-class Onboarding extends Component {
+class Onboarding extends Pure.Component {
   constructor() {
     super();
 
@@ -31,15 +30,7 @@ class Onboarding extends Component {
       previousPage: null,
       width: null,
       height: null,
-      backgroundColorAnim: new Animated.Value(0),
     };
-  }
-
-  componentDidUpdate() {
-    Animated.timing(this.state.backgroundColorAnim, {
-      toValue: 1,
-      duration: this.props.transitionAnimationDuration,
-    }).start();
   }
 
   onSwipePageChange = ({ viewableItems }) => {
@@ -52,7 +43,6 @@ class Onboarding extends Component {
       return {
         previousPage: state.currentPage,
         currentPage: viewableItems[0].index,
-        backgroundColorAnim: new Animated.Value(0),
       };
     });
   };
@@ -71,40 +61,8 @@ class Onboarding extends Component {
 
   keyExtractor = (item, index) => index.toString();
 
-  renderItem = ({ item }) => {
-    const { image, title, subtitle, backgroundColor } = item;
-    const isLight = tinycolor(backgroundColor).getBrightness() > 180;
-    const {
-      containerStyles,
-      imageContainerStyles,
-      allowFontScalingText,
-      titleStyles,
-      subTitleStyles,
-    } = this.props;
-
-    return (
-      <Page
-        isLight={isLight}
-        image={image}
-        title={title}
-        subtitle={subtitle}
-        width={this.state.width || Dimensions.get('window').width}
-        height={this.state.height || Dimensions.get('window').height}
-        containerStyles={containerStyles}
-        imageContainerStyles={imageContainerStyles}
-        allowFontScaling={allowFontScalingText}
-        titleStyles={Object.assign(
-          {},
-          titleStyles || {},
-          item.titleStyles || {}
-        )}
-        subTitleStyles={Object.assign(
-          {},
-          subTitleStyles || {},
-          item.subTitleStyles || {}
-        )}
-      />
-    );
+  renderItem = ({ item: Page }) => {
+    return <Page />
   };
 
   render() {
@@ -129,43 +87,21 @@ class Onboarding extends Component {
       DotComponent,
       flatlistProps,
       skipToPage,
+      isLight
     } = this.props;
     const currentPage = pages[this.state.currentPage];
     const currentBackgroundColor = currentPage.backgroundColor;
-    const isLight = tinycolor(currentBackgroundColor).getBrightness() > 180;
     const barStyle = isLight ? 'dark-content' : 'light-content';
-    const bottomBarHighlight =
-      alterBottomColor !== undefined
-        ? alterBottomColor
-        : this.props.bottomBarHighlight;
-
-    let backgroundColor = currentBackgroundColor;
-    if (
-      this.state.previousPage !== null &&
-      pages[this.state.previousPage] !== undefined
-    ) {
-      const previousBackgroundColor =
-        pages[this.state.previousPage].backgroundColor;
-      backgroundColor = this.state.backgroundColorAnim.interpolate({
-        inputRange: [0, 1],
-        outputRange: [previousBackgroundColor, currentBackgroundColor],
-      });
-    }
-
-    if (alterBottomColor !== undefined) {
-      console.warn(
-        'The prop alterBottomColor on react-native-onboarding-swiper is deprecated and will be removed soon. Use `bottomBarHighlight` instead.'
-      );
-    }
+    const bottomBarHighlight = this.props.bottomBarHighlight;
 
     const skipFun =
       skipToPage != null
         ? () => {
-            this.flatList.scrollToIndex({
-              animated: true,
-              index: skipToPage,
-            });
-          }
+          this.flatList.scrollToIndex({
+            animated: true,
+            index: skipToPage,
+          });
+        }
         : onSkip;
 
     return (
@@ -224,17 +160,7 @@ class Onboarding extends Component {
 
 Onboarding.propTypes = {
   pages: PropTypes.arrayOf(
-    PropTypes.shape({
-      backgroundColor: PropTypes.string.isRequired,
-      image: PropTypes.element.isRequired,
-      title: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.element,
-        PropTypes.func,
-      ]).isRequired,
-      subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-        .isRequired,
-    })
+    PropTypes.elementType
   ).isRequired,
   bottomBarHighlight: PropTypes.bool,
   bottomBarHeight: PropTypes.number,
@@ -244,6 +170,7 @@ Onboarding.propTypes = {
   showNext: PropTypes.bool,
   showDone: PropTypes.bool,
   showPagination: PropTypes.bool,
+  isLight: PropTypes.bool,
   onSkip: PropTypes.func,
   onDone: PropTypes.func,
   skipLabel: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
@@ -269,6 +196,7 @@ Onboarding.defaultProps = {
   bottomBarColor: 'transparent',
   controlStatusBar: true,
   showPagination: true,
+  isLight: true,
   showSkip: true,
   showNext: true,
   showDone: true,

@@ -1,14 +1,14 @@
 {
-  "name": "react-native-onboarding-swiper",
+  "name": "react-native-onboarding-custom-swiper",
   "version": "1.1.0",
-  "description": "Delightful Onboarding for your React-Native App",
+  "description": "Onboarding for your React-Native App with custom components",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jfilter/react-native-onboarding-swiper"
+    "url": "git+https://github.com/klaaz0r/react-native-onboarding-swiper"
   },
   "keywords": [
     "React",
@@ -21,14 +21,16 @@
     "Swiper",
     "Welcome",
     "Introduction",
-    "Instructions"
+    "Instructions",
+    "Custom",
+    "Components"
   ],
-  "author": "Gosha Arinich, Johannes Filter",
+  "author": "Gosha Arinich, Johannes Filter, Klaas Foppen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jfilter/react-native-onboarding-swiper/issues"
+    "url": "https://github.com/klaaz0r/react-native-onboarding-swiper/issues"
   },
-  "homepage": "https://github.com/jfilter/react-native-onboarding-swiper#readme",
+  "homepage": "https://github.com/klaaz0r/react-native-onboarding-swiper#readme",
   "dependencies": {
     "tinycolor2": "^1.4.1"
   },

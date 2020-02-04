@@ -10,7 +10,6 @@ import {
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import tinycolor from 'tinycolor2';
 
 import Pagination from './Pagination';
 import Dot from './Dot';

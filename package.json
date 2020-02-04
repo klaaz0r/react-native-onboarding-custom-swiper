@@ -1,6 +1,6 @@
 {
   "name": "react-native-onboarding-custom-swiper",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Onboarding for your React-Native App with custom components",
   "main": "src/index.js",
   "scripts": {

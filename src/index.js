@@ -20,7 +20,7 @@ import DoneButton from './buttons/DoneButton';
 // hotfix: https://github.com/facebook/react-native/issues/16710
 const itemVisibleHotfix = { itemVisiblePercentThreshold: 100 };
 
-class Onboarding extends Pure.Component {
+export default class Onboarding extends Component {
   constructor() {
     super();
 
@@ -67,7 +67,6 @@ class Onboarding extends Pure.Component {
   render() {
     const {
       pages,
-      alterBottomColor,
       bottomBarHeight,
       bottomBarColor,
       controlStatusBar,
@@ -106,7 +105,7 @@ class Onboarding extends Pure.Component {
     return (
       <Animated.View
         onLayout={this._onLayout}
-        style={{ flex: 1, backgroundColor, justifyContent: 'center' }}
+        style={{ flex: 1, backgroundColor: currentBackgroundColor, justifyContent: 'center' }}
       >
         {controlStatusBar && <StatusBar barStyle={barStyle} />}
         <FlatList
@@ -223,5 +222,3 @@ const styles = {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
   },
 };
-
-export default Onboarding;
